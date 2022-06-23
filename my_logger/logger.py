@@ -6,13 +6,13 @@ import argparse
 from loguru import logger
 
 
-
 def main():
     logger.debug("This is DEBUG")
     logger.info("This is INFO")
     logger.warning("This is WARNING")
     logger.critical("This is CRITICAL")
     logger.error("This is ERROR")
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

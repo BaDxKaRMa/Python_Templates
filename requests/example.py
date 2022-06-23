@@ -1,10 +1,11 @@
-import sys
 import argparse
-import requests
-import json
+import sys
+
 from loguru import logger
+import requests
 
 url = "https://randomuser.me/api/"
+
 
 @logger.catch
 def get_user():
@@ -12,10 +13,12 @@ def get_user():
         logger.debug(f"Querying {url}")
         r = s.get(url)
         r.raise_for_status()
-        jsonResponse = r.json()
-        logger.success(f"Success found [{jsonResponse['results'][0]['name']['first']}]")
-        logger.debug(jsonResponse)
-        return jsonResponse['results'][0]
+        json_response = r.json()
+        logger.success(
+            f"Success found [{json_response['results'][0]['name']['first']}]"
+        )
+        logger.debug(json_response)
+        return json_response["results"][0]
     except requests.exceptions.ConnectionError as err:
         logger.critical(f"Connection error: {err}")
         raise SystemExit()
@@ -26,9 +29,15 @@ def get_user():
         logger.error(f"Catch All Error: {err}")
         raise SystemExit()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--debug", action="store_true", default=False, help="Set the LOG_LEVEL to DEBUG.")
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        default=False,
+        help="Set the LOG_LEVEL to DEBUG.",
+    )
     args = parser.parse_args()
     logger.remove()
     if args.debug:
@@ -38,3 +47,5 @@ if __name__ == '__main__':
 
     s = requests.session()
     get_user()
+else:
+    pass
