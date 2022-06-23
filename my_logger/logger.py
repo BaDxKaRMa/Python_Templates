@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import argparse
+import sys
+
 from loguru import logger
 
 
@@ -14,9 +15,14 @@ def main():
     logger.error("This is ERROR")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--debug", action="store_true", default=False, help="Set the LOG_LEVEL to DEBUG.")
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        default=False,
+        help="Set the LOG_LEVEL to DEBUG.",
+    )
     args = parser.parse_args()
     logger.remove()
     if args.debug:

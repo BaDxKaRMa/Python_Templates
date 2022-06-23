@@ -48,6 +48,7 @@ if __name__ == "__main__":
         logger.add(sys.stderr, level="INFO")
 
     s = requests.session()
-    get_user()
+    user = get_user()
+    print(user)
 else:
     pass
