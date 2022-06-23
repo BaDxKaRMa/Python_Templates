@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import argparse
 import sys
 
@@ -23,7 +25,7 @@ def get_user():
         logger.critical(f"Connection error: {err}")
         raise SystemExit()
     except requests.exceptions.HTTPError as err:
-        logger.error(err)
+        logger.error(f"HTTP error: {err}")
         raise SystemExit()
     except requests.exceptions.RequestException as err:
         logger.error(f"Catch All Error: {err}")
