@@ -17,6 +17,7 @@ def test_logger():
     logger.critical("This is a critical message")
     logger.success("This is a success message")
 
+
 @logger.catch
 def get_user():
     """
