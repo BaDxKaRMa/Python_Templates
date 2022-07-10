@@ -13,7 +13,7 @@ def main():
     logger.warning("This is WARNING")
     logger.critical("This is CRITICAL")
     logger.error("This is ERROR")
-
+    logger.success("This is SUCCESS")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -24,10 +24,14 @@ if __name__ == "__main__":
         help="Set the LOG_LEVEL to DEBUG.",
     )
     args = parser.parse_args()
+    # Remove all handlers
     logger.remove()
+    # Set loguru format
+    fmt = "<green>{time:YYYY-MM-DD hh:mm:ss A}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
+
     if args.debug:
-        logger.add(sys.stderr, level="DEBUG")
+        logger.add(sys.stderr, format=fmt, level="DEBUG")
     else:
-        logger.add(sys.stderr, level="INFO")
+        logger.add(sys.stderr, format=fmt, level="INFO")
 
     main()
