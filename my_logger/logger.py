@@ -22,7 +22,7 @@ if __name__ == "__main__":
         "--debug",
         action="store_true",
         default=False,
-        help="Set the LOG_LEVEL to DEBUG.",
+        help="Enable debug logging"
     )
     args = parser.parse_args()
     # Remove all handlers

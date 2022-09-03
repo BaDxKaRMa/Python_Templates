@@ -3,8 +3,9 @@
 import argparse
 import sys
 
-from loguru import logger
 import requests
+
+from loguru import logger
 
 url = "https://randomuser.me/api/"
 
