@@ -5,6 +5,7 @@ import sys
 
 
 def check_input():
+    """Checks if the input is null"""
     if not sys.stdin.isatty():
         data = sys.stdin.readlines()
         return data
@@ -16,9 +17,13 @@ def check_input():
 
 
 def parse_csv(data):
+    """
+    returns a list of dictionaries using the headers as keys
+    """
     reader = csv.DictReader(data)
     parsed_data = [row for row in reader]
     return parsed_data
 
 
-print(parse_csv(check_input()))
+if __name__ == "__main__":
+    print(parse_csv(check_input()))
