@@ -3,9 +3,9 @@
 import argparse
 import sys
 
-import requests
-
 from loguru import logger
+
+import requests
 
 url = "https://randomuser.me/api/"
 
@@ -48,27 +48,31 @@ if __name__ == "__main__":
     else:
         logger.add(sys.stderr, level="INFO")
 
-    ## START HERE
-    s = requests.session()
-    user = get_user()
+    # START HERE
+    try:
+        s = requests.session()
+        user = get_user()
 
-    # Place user data into variables
-    first_name = user["name"]["first"]
-    last_name = user["name"]["last"]
-    email = user["email"]
-    phone = user["phone"]
-    city = user["location"]["city"]
-    state = user["location"]["state"]
+        # Place user data into variables
+        first_name = user["name"]["first"]
+        last_name = user["name"]["last"]
+        email = user["email"]
+        phone = user["phone"]
+        city = user["location"]["city"]
+        state = user["location"]["state"]
 
-    # Print user data
-    logger.info(f"First Name: {first_name}")
-    logger.info(f"Last Name: {last_name}")
-    logger.info(f"Email: {email}")
-    logger.info(f"Phone: {phone}")
-    logger.info(f"City: {city}")
-    logger.info(f"State: {state}")
+        # Print user data
+        logger.info(f"First Name: {first_name}")
+        logger.info(f"Last Name: {last_name}")
+        logger.info(f"Email: {email}")
+        logger.info(f"Phone: {phone}")
+        logger.info(f"City: {city}")
+        logger.info(f"State: {state}")
 
-    # Close the session
-    s.close()
+        # Close the session
+        s.close()
+    except requests.exceptions.ConnectionError as err:
+        logger.critical(f"Connection error: {err}")
+        raise SystemExit()
 else:
     pass
