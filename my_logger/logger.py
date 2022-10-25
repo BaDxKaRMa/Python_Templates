@@ -28,8 +28,8 @@ if __name__ == "__main__":
     # Remove all handlers
     logger.remove()
     # Set loguru format
-    fmt = "<green>{time:YYYY-MM-DD hh:mm:ss A}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{" \
-          "function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level> "
+    fmt = '<green>{time:YYYY-MM-DD hh:mm:ss A}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{' \
+          'function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level> '
 
     if args.debug:
         logger.add(sys.stderr, format=fmt, level="DEBUG")
