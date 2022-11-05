@@ -5,8 +5,9 @@ import argparse
 import sys
 from dataclasses import dataclass
 
-import requests
 from loguru import logger
+
+import requests
 
 
 def test_logger():
@@ -30,7 +31,7 @@ def get_user():
     try:
         r = requests.get("https://randomuser.me/api/")
         r.raise_for_status()
-        results = r.json()['results'][0]
+        results = r.json()["results"][0]
         logger.debug(results)
         logger.success(f"Successfully found {results['name']['first']}")
         return results
@@ -49,21 +50,34 @@ class Person:
 
 def main() -> Person:
     user = get_user()
-    person = Person(user['name']['first'], user['name']['last'], user['login']['username'], user['login']['password'])
+    person = Person(
+        user["name"]["first"],
+        user["name"]["last"],
+        user["login"]["username"],
+        user["login"]["password"],
+    )
     logger.debug(f"{person}")
     return person
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--debug", action="store_true", default=False, help="Set the LOG_LEVEL to DEBUG.")
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        default=False,
+        help="Set the LOG_LEVEL to DEBUG.",
+    )
     args = parser.parse_args()
     logger.remove()
     if args.debug:
         logger.add(sys.stderr, level="DEBUG")
     else:
-        logger.add(sys.stderr, level="INFO",
-                   format="<level>{time}</level> | <level>{level}</level> | <level>{message}</level>")
+        logger.add(
+            sys.stderr,
+            level="INFO",
+            format="<level>{time}</level> | <level>{level}</level> | <level>{message}</level>",
+        )
 
     people = []
     for i in range(3):
