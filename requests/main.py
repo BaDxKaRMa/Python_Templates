@@ -2,6 +2,7 @@
 
 import argparse
 import sys
+from tabulate import tabulate
 
 from loguru import logger
 
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     if args.debug:
         logger.add(sys.stderr, level="DEBUG")
     else:
-        logger.add(sys.stderr, level="INFO")
+        logger.add(sys.stderr, level="ERROR")
 
     # START HERE
     try:
@@ -61,13 +62,15 @@ if __name__ == "__main__":
         city = user["location"]["city"]
         state = user["location"]["state"]
 
-        # Print user data
-        logger.info(f"First Name: {first_name}")
-        logger.info(f"Last Name: {last_name}")
-        logger.info(f"Email: {email}")
-        logger.info(f"Phone: {phone}")
-        logger.info(f"City: {city}")
-        logger.info(f"State: {state}")
+        logger.debug(
+            f"First Name: {first_name}, Last Name: {last_name}, Email: {email}, Phone: {phone}, City: {city}, State: {state}"
+        )
+        print(
+            tabulate(
+                [[first_name, last_name, email, phone, city, state]],
+                headers=["First", "Last", "Email", "Phone", "City", "State"],
+            )
+        )
 
         # Close the session
         s.close()
